@@ -6,3 +6,7 @@
 ### Mainly on different lot sizs(dynamic) getting around  2500 percent return.
 ### While fixed lot size and using 1 lot size :- making 80,60,and 30 percent capital on different lot size while backtesting showing how much capital we deployed per trade to access returns.
 
+Initial Capital:    ₹200,000
+Final Capital:      ₹5,223,126
+Total P&L:          ₹5,023,126.40
+*Total Return:       2511.56%*
