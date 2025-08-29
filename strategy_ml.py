@@ -9,10 +9,14 @@ from datetime import datetime, time, date
 import warnings
 import pyarrow as pa
 import pyarrow.parquet as pq
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 warnings.filterwarnings('ignore')
 df_options_data= pd.read_parquet('options_data_2023.parquet')
 spot_with_signals = pd.read_csv('spot_with_signals_2023.csv')
 mapping = {'Hold': 0, 'Buy': 1, 'Sell': -1}
+spot_with_signals['cross'] = spot_with_signals['cross'].fillna(0)
 spot_with_signals['signal_encoded'] = spot_with_signals['signal'].map(mapping)
 df = spot_with_signals.copy()
 H = 3  
@@ -149,8 +153,6 @@ X_all_ = X_full.select_dtypes(include=[np.number]).astype(float)
 dall = xgb.DMatrix(X_all_, label=y_full)
 p_all = predict_with_best(bst, dall)   # uses best_iteration
 ml_vote_all = np.where(p_all >= best_thr, 1, -1)
-
-# 8.3 Indicator vote (example: RSI + cross) for all rows aligned to X_full indices
 def indicator_vote_row(row):
     votes = []
     # RSI (mean-reversion)
@@ -188,3 +190,6 @@ df = df.assign(
 )
 
 spot_with_signals['composite_signal'] = df['composite_signal']
+df_options_data['expiry_date'] = pd.to_datetime(df_options_data['expiry_date'])
+df_options_data['expiry_date']=df_options_data['expiry_date'].dt.date
+#print(spot_with_signals)
