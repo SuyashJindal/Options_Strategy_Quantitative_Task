@@ -9,4 +9,22 @@
 Initial Capital:    ₹200,000
 Final Capital:      ₹5,223,126
 Total P&L:          ₹5,023,126.40
-*Total Return:       2511.56%*
+** Total Return:       2511.56% **
+The Composite Signal is an ensemble-based trading decision.
+It blends three sources:
+
+Core signal (50%) – baseline strategy rule
+
+Machine learning vote (30%) – predictive model
+
+Technical indicator vote (20%) – RSI & crossover rules
+
+The weighted score decides the final action:
+
+Buy if score ≥ 0.4
+
+Sell if score ≤ -0.4
+
+Hold otherwise
+
+This approach reduces reliance on any single model/indicator and balances rule-based logic + data-driven learning + technical confirmation
